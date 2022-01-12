@@ -31,13 +31,11 @@ class PixFragment : Fragment() {
     ): View {
         binding = FragmentPixBinding.inflate(inflater,container,false)
 
-        pixyViewModel.getAllPix("dog")
-        pixyViewModel.pixResults.value?.let {
-            subscribeToObserver(it.toString()) }
-        //subscribeToObserver("dog")
+        subscribeToObserver()
 
         binding.searchImage.setEndIconOnClickListener {
-            subscribeToObserver(binding.searchImage.editText?.text.toString())
+            pixyViewModel.getAllPix(binding.searchImage.editText?.text.toString())
+            //subscribeToObserver(binding.searchImage.editText?.text.toString())
             binding.picProgressBar.isVisible =true
             hideKeyboard()
         }
@@ -46,20 +44,20 @@ class PixFragment : Fragment() {
         return binding.root
     }
 
-    private fun subscribeToObserver(searchPic:String){
-        pixyViewModel.pixResults.observe(viewLifecycleOwner, Observer { pixyModel ->
-            when(pixyModel){
+    private fun subscribeToObserver(){
+        pixyViewModel.pixResults.observe(viewLifecycleOwner, Observer { result ->
+            when(result){
                 is Resource.Success ->{
                     binding.picProgressBar.isVisible =false
                     binding.recyclerView.isVisible = true
-                    if (pixyModel.data?.isEmpty()!!){
+                    if (result.data?.hits?.isEmpty()!!){
                         showSnackbar("No Data Yet, Try Again")
                     } else{
-                        pixyAdapter.submitList(pixyModel.data)
+                        pixyAdapter.submitList(result.data.hits)
                         binding.recyclerView.adapter = pixyAdapter
                         binding.recyclerView.isVisible  = true
 
-                        Timber.d("${pixyModel.data}")
+                        Timber.d("${result.data}")
                     }
                 }
                 is Resource.Loading ->{

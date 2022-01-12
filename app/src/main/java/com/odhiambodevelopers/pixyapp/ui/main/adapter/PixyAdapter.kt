@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.odhiambodevelopers.pixyapp.R
-import com.odhiambodevelopers.pixyapp.data.model.PixyModel
 import com.odhiambodevelopers.pixyapp.databinding.PixRowBinding
+import com.odhiambodevelopers.pixyapp.model.PixyModel
 
 class PixyAdapter:ListAdapter<PixyModel,PixyAdapter.MyViewHolder>(COMPARATOR) {
 
