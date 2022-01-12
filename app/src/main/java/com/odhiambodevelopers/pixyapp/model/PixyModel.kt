@@ -1,4 +1,4 @@
-package com.odhiambodevelopers.pixyapp.data.model
+package com.odhiambodevelopers.pixyapp.model
 
 
 import com.google.gson.annotations.SerializedName
