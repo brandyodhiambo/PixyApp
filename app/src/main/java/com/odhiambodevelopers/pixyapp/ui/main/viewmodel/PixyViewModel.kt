@@ -9,6 +9,7 @@ import com.odhiambodevelopers.pixyapp.data.repository.PixyRepository
 import com.odhiambodevelopers.pixyapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,5 +24,6 @@ class PixyViewModel @Inject constructor(private val pixyRepository: PixyReposito
             _pixResults.value = Resource.Loading()
             _pixResults.value = pixyRepository.getALlPix(query)
         }
+        Timber.d("Viewmodel")
     }
 }

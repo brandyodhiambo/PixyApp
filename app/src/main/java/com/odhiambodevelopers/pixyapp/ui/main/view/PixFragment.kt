@@ -5,56 +5,74 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.odhiambodevelopers.pixyapp.R
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import com.odhiambodevelopers.pixyapp.databinding.FragmentPixBinding
+import com.odhiambodevelopers.pixyapp.ui.main.adapter.PixyAdapter
+import com.odhiambodevelopers.pixyapp.ui.main.viewmodel.PixyViewModel
+import com.odhiambodevelopers.pixyapp.utils.Resource
+import com.odhiambodevelopers.pixyapp.utils.hideKeyboard
+import com.odhiambodevelopers.pixyapp.utils.showSnackbar
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PixFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class PixFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentPixBinding
+    private val pixyViewModel:PixyViewModel by viewModels()
+    private val pixyAdapter by lazy { PixyAdapter() }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pix, container, false)
+    ): View {
+        binding = FragmentPixBinding.inflate(inflater,container,false)
+
+        pixyViewModel.getAllPix("dog")
+        pixyViewModel.pixResults.value?.let {
+            subscribeToObserver(it.toString()) }
+        //subscribeToObserver("dog")
+
+        binding.searchImage.setEndIconOnClickListener {
+            subscribeToObserver(binding.searchImage.editText?.text.toString())
+            binding.picProgressBar.isVisible =true
+            hideKeyboard()
+        }
+
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PixFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PixFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun subscribeToObserver(searchPic:String){
+        pixyViewModel.pixResults.observe(viewLifecycleOwner, Observer { pixyModel ->
+            when(pixyModel){
+                is Resource.Success ->{
+                    binding.picProgressBar.isVisible =false
+                    binding.recyclerView.isVisible = true
+                    if (pixyModel.data?.isEmpty()!!){
+                        showSnackbar("No Data Yet, Try Again")
+                    } else{
+                        pixyAdapter.submitList(pixyModel.data)
+                        binding.recyclerView.adapter = pixyAdapter
+                        binding.recyclerView.isVisible  = true
+
+                        Timber.d("${pixyModel.data}")
+                    }
                 }
+                is Resource.Loading ->{
+                    binding.picProgressBar.isVisible =true
+                    binding.recyclerView.isVisible = false
+                }
+                is Resource.Failure ->{
+                    binding.picProgressBar.isVisible = false
+                    showSnackbar("Error Occurred")
+                }
+
             }
+
+        })
     }
 }
