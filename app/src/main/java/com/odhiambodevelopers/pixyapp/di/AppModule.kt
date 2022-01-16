@@ -1,5 +1,6 @@
 package com.odhiambodevelopers.pixyapp.di
 
+import com.odhiambodevelopers.pixyapp.data.local.PixyDatabase
 import com.odhiambodevelopers.pixyapp.data.network.api.ApiService
 import com.odhiambodevelopers.pixyapp.data.repository.PixyRepository
 import com.odhiambodevelopers.pixyapp.utils.Constants.BASE_URL
@@ -28,7 +29,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePixyRepository(apiService: ApiService):PixyRepository{
-        return PixyRepository(apiService)
+    fun providePixyRepository(apiService: ApiService,pixyDatabase:PixyDatabase):PixyRepository{
+        return PixyRepository(apiService, pixyDatabase)
     }
+
+
 }

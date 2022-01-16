@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.odhiambodevelopers.pixyapp.data.repository.PixyRepository
-import com.odhiambodevelopers.pixyapp.model.ApiResponse
-import com.odhiambodevelopers.pixyapp.model.PixyModel
+import com.odhiambodevelopers.pixyapp.data.network.api.ApiResponse
 import com.odhiambodevelopers.pixyapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

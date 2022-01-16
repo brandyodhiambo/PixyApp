@@ -1,0 +1,18 @@
+package com.odhiambodevelopers.pixyapp.data.local
+
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+
+@Dao
+interface PixyDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertImages(images: List<PixyEntity>)
+
+    @Query("DELETE FROM pixyentity WHERE previewURL IN(:images)")
+    suspend fun deleteImages(images: List<String>)
+
+    @Query("SELECT * FROM pixyentity WHERE tags OR previewURL OR pageURL LIKE '%' || :query || '%'")
+    suspend fun getImages(query: String?): List<PixyEntity>
+}
