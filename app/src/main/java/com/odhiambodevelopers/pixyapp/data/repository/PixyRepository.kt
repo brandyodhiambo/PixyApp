@@ -22,6 +22,9 @@ class PixyRepository@Inject constructor(private val apiService: ApiService,
     }
 
 
-    suspend fun insertImages(pixy: List<PixyEntity>) = pixyDatabase.dao.insertImages(pixy)
+    suspend fun insertImages(image:String) {
+        val data= apiService.getPix(image)
+       // pixyDatabase.dao.insertImages(data)
+    }
     suspend fun deleteImage(image: List<String>) = pixyDatabase.dao.deleteImages(image)
 }
