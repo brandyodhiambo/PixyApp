@@ -35,6 +35,7 @@ class PixFragment : Fragment() {
 
         binding.searchImage.setEndIconOnClickListener {
             pixyViewModel.getAllPix(binding.searchImage.editText?.text.toString())
+            pixyViewModel.storeImages(binding.searchImage.editText?.text.toString())
             //subscribeToObserver(binding.searchImage.editText?.text.toString())
             binding.picProgressBar.isVisible =true
             hideKeyboard()

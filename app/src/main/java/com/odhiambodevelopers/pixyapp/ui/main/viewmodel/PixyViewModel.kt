@@ -21,6 +21,9 @@ class PixyViewModel @Inject constructor(private val pixyRepository: PixyReposito
     private val _searchWord = MutableLiveData("")
     val searchWord: LiveData<String?> = _searchWord
 
+    private val _store = MutableLiveData("")
+    val store: LiveData<String?> = _store
+
     init {
         getAllPix("dogs")
     }
@@ -33,5 +36,14 @@ class PixyViewModel @Inject constructor(private val pixyRepository: PixyReposito
             Timber.d("${pixyRepository.getALlPix(query)}")
         }
         Timber.d("Viewmodel")
+    }
+
+    fun storeImages(query: String){
+        _store.value = query
+        viewModelScope.launch {
+            pixyRepository.getImage(query)
+            pixyRepository.insertImages(query)
+            Timber.d("${pixyRepository.insertImages(query)}")
+        }
     }
 }
