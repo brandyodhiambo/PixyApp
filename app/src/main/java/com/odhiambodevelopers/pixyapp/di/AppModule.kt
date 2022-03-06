@@ -1,5 +1,7 @@
 package com.odhiambodevelopers.pixyapp.di
 
+import android.app.Application
+import androidx.room.Room
 import com.odhiambodevelopers.pixyapp.data.local.PixyDatabase
 import com.odhiambodevelopers.pixyapp.data.network.api.ApiService
 import com.odhiambodevelopers.pixyapp.data.repository.PixyRepository
@@ -33,5 +35,15 @@ object AppModule {
         return PixyRepository(apiService, pixyDatabase)
     }
 
+    /*@Provides
+    @Singleton
+    fun provideCarListAPI(retrofit: Retrofit): ApiService =
+        retrofit.create(ApiService::class.java)*/
+
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application): PixyDatabase =
+        Room.databaseBuilder(app, PixyDatabase::class.java, "picture")
+            .build()
 
 }

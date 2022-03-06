@@ -4,6 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.odhiambodevelopers.pixyapp.data.network.api.ApiResponse
+import com.odhiambodevelopers.pixyapp.model.PixyModel
 
 @Dao
 interface PixyDao {
