@@ -10,7 +10,7 @@ import com.odhiambodevelopers.pixyapp.model.PixyModel
 @Dao
 interface PixyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertImages(images: ApiResponse)
+    suspend fun insertImages(images: List<PixyEntity>)
 
     @Query("DELETE FROM pixyentity WHERE previewURL IN(:images)")
     suspend fun deleteImages(images: List<String>)

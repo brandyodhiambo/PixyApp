@@ -16,6 +16,7 @@ import com.odhiambodevelopers.pixyapp.utils.Resource
 import com.odhiambodevelopers.pixyapp.utils.hideKeyboard
 import com.odhiambodevelopers.pixyapp.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -31,12 +32,10 @@ class PixFragment : Fragment() {
     ): View {
         binding = FragmentPixBinding.inflate(inflater,container,false)
 
-        subscribeToObserver()
+        pixyViewModel.searchQuery.value?.let { subscribeToObserver(it) }
 
         binding.searchImage.setEndIconOnClickListener {
-            pixyViewModel.getAllPix(binding.searchImage.editText?.text.toString())
-            pixyViewModel.storeImages(binding.searchImage.editText?.text.toString())
-            //subscribeToObserver(binding.searchImage.editText?.text.toString())
+            subscribeToObserver(binding.searchImage.editText?.text.toString())
             binding.picProgressBar.isVisible =true
             hideKeyboard()
         }
@@ -45,33 +44,35 @@ class PixFragment : Fragment() {
         return binding.root
     }
 
-    private fun subscribeToObserver(){
-        pixyViewModel.pixResults.observe(viewLifecycleOwner, Observer { result ->
-            when(result){
-                is Resource.Success ->{
-                    binding.picProgressBar.isVisible =false
-                    binding.recyclerView.isVisible = true
-                    if (result.data?.hits?.isEmpty()!!){
-                        showSnackbar("No Data Yet, Try Again")
-                    } else{
-                        pixyAdapter.submitList(result.data.hits)
-                        binding.recyclerView.adapter = pixyAdapter
-                        binding.recyclerView.isVisible  = true
+    private fun subscribeToObserver(query: String){
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            pixyViewModel.getImages(query).collect { result ->
+                when(result){
+                    is Resource.Success ->{
+                        binding.picProgressBar.isVisible =false
+                        binding.recyclerView.isVisible = true
+                        if (result.data?.isEmpty()!!){
+                            showSnackbar("No Data Yet, Try Again")
+                        } else{
+                            val images = result.data
+                            pixyAdapter.submitList(images)
+                            binding.recyclerView.adapter = pixyAdapter
 
-                        Timber.d("${result.data}")
+                            Timber.d("${result.data}")
+                        }
                     }
-                }
-                is Resource.Loading ->{
-                    binding.picProgressBar.isVisible =true
-                    binding.recyclerView.isVisible = false
-                }
-                is Resource.Failure ->{
-                    binding.picProgressBar.isVisible = false
-                    showSnackbar("Error Occurred")
+                    is Resource.Loading ->{
+                        binding.picProgressBar.isVisible =true
+                        binding.recyclerView.isVisible = false
+                    }
+                    is Resource.Failure ->{
+                        binding.picProgressBar.isVisible = false
+                        showSnackbar("Error Occurred")
+                    }
+
                 }
 
             }
-
-        })
+        }
     }
 }
