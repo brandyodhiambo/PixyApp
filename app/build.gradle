@@ -3,6 +3,9 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'org.jetbrains.kotlin.android.extensions'
+    id 'androidx.navigation.safeargs'
+
 }
 
 android {
@@ -32,6 +35,9 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    androidExtensions {
+        experimental = true
     }
 }
 

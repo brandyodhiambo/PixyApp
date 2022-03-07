@@ -7,7 +7,20 @@
 
     <fragment
         android:id="@+id/pixFragment"
-        android:name="com.odhiambodevelopers.pixyapp.ui.main.view.PixFragment"
+        android:name="com.odhiambodevelopers.pixyapp.ui.main.view.fragments.PixFragment"
         android:label="Pictures"
-        tools:layout="@layout/fragment_pix" />
+        tools:layout="@layout/fragment_pix" >
+        <action
+            android:id="@+id/action_pixFragment_to_pixDetailsFragment"
+            app:destination="@id/pixDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pixDetailsFragment"
+        android:name="com.odhiambodevelopers.pixyapp.ui.main.view.fragments.PixDetailsFragment"
+        android:label="Picture Details"
+        tools:layout="@layout/fragment_pix_details" >
+        <argument
+            android:name="imageDetails"
+            app:argType="com.odhiambodevelopers.pixyapp.data.local.PixyEntity" />
+    </fragment>
 </navigation>

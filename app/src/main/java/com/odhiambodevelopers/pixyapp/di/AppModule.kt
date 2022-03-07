@@ -35,10 +35,6 @@ object AppModule {
         return PixyRepository(apiService, pixyDatabase)
     }
 
-    /*@Provides
-    @Singleton
-    fun provideCarListAPI(retrofit: Retrofit): ApiService =
-        retrofit.create(ApiService::class.java)*/
 
     @Provides
     @Singleton

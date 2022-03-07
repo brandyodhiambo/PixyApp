@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/fragment_pix.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_pix_details.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/pix_row.xml" value="0.1" />
       </map>
     </option>

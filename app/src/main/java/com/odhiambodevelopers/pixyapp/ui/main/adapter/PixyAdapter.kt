@@ -9,8 +9,9 @@ import com.bumptech.glide.Glide
 import com.odhiambodevelopers.pixyapp.R
 import com.odhiambodevelopers.pixyapp.data.local.PixyEntity
 import com.odhiambodevelopers.pixyapp.databinding.PixRowBinding
+import com.odhiambodevelopers.pixyapp.model.PixyModel
 
-class PixyAdapter:ListAdapter<PixyEntity,PixyAdapter.MyViewHolder>(COMPARATOR) {
+class PixyAdapter(private val onClickListener: OnClickListener):ListAdapter<PixyEntity,PixyAdapter.MyViewHolder>(COMPARATOR) {
 
     object COMPARATOR:DiffUtil.ItemCallback<PixyEntity>() {
         override fun areItemsTheSame(oldItem: PixyEntity, newItem: PixyEntity): Boolean {
@@ -39,6 +40,12 @@ class PixyAdapter:ListAdapter<PixyEntity,PixyAdapter.MyViewHolder>(COMPARATOR) {
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val pix = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(pix)
+        }
         holder.bind(pix)
+    }
+    class OnClickListener(val clickListener: (pix: PixyEntity) -> Unit) {
+        fun onClick(pix: PixyEntity) = clickListener(pix)
     }
 }

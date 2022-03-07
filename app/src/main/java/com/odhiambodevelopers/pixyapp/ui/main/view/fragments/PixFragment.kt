@@ -1,14 +1,16 @@
-package com.odhiambodevelopers.pixyapp.ui.main.view
+package com.odhiambodevelopers.pixyapp.ui.main.view.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.odhiambodevelopers.pixyapp.R
 import com.odhiambodevelopers.pixyapp.databinding.FragmentPixBinding
 import com.odhiambodevelopers.pixyapp.ui.main.adapter.PixyAdapter
 import com.odhiambodevelopers.pixyapp.ui.main.viewmodel.PixyViewModel
@@ -23,7 +25,8 @@ import timber.log.Timber
 class PixFragment : Fragment() {
     private lateinit var binding: FragmentPixBinding
     private val pixyViewModel:PixyViewModel by viewModels()
-    private val pixyAdapter by lazy { PixyAdapter() }
+    //private val pixyAdapter by lazy { PixyAdapter() }
+    private lateinit var pixyAdapter:PixyAdapter
 
 
     override fun onCreateView(
@@ -31,6 +34,11 @@ class PixFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPixBinding.inflate(inflater,container,false)
+
+        pixyAdapter = PixyAdapter(PixyAdapter.OnClickListener { photo ->
+            val action = PixFragmentDirections.actionPixFragmentToPixDetailsFragment(photo)
+            findNavController().navigate(action)
+        })
 
         pixyViewModel.searchQuery.value?.let { subscribeToObserver(it) }
 

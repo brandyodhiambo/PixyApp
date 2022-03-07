@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PixyApp">
         <activity
-            android:name=".ui.main.view.MainActivity"
+            android:name=".ui.main.view.activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
