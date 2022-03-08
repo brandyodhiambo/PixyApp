@@ -2,5 +2,6 @@
     <string name="app_name">Pixy App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name ="Search">Search</string>
+    <string name="Search">Search</string>
+    <string name="picture_contributer">picture contributer</string>
 </resources>

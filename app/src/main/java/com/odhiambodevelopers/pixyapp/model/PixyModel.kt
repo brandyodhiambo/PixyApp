@@ -1,8 +1,10 @@
 package com.odhiambodevelopers.pixyapp.model
 
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class PixyModel(
     val collections: Int?,
     val comments: Int?,
@@ -26,4 +28,4 @@ data class PixyModel(
     val webformatHeight: Int?,
     val webformatURL: String?,
     val webformatWidth: Int?
-)
+) : Parcelable

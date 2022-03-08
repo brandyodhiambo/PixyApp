@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".ui.main.view.fragments.PixDetailsFragment">
+
+<androidx.appcompat.widget.AppCompatImageView
+    android:id="@+id/imageView"
+    android:layout_width="0dp"
+    android:layout_height="250dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/ic_launcher_background"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<TextView
+    android:id="@+id/textViewLikes"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="24dp"
+    android:drawablePadding="10dp"
+    android:gravity="center"
+    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+    app:drawableLeftCompat="@drawable/ic_thumbs_up"
+    app:layout_constraintEnd_toStartOf="@+id/textViewViews"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/imageView"
+    tools:text="258" />
+
+<TextView
+    android:id="@+id/textViewViews"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:drawablePadding="10dp"
+    android:gravity="center"
+    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+    app:drawableLeftCompat="@drawable/ic_eye"
+    app:layout_constraintEnd_toStartOf="@+id/textViewDownloads"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/textViewLikes"
+    app:layout_constraintTop_toTopOf="@+id/textViewLikes"
+    tools:text="350" />
+
+<TextView
+    android:id="@+id/textViewDownloads"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:drawablePadding="10dp"
+    android:gravity="center"
+    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+    app:drawableLeftCompat="@drawable/ic_baseline_arrow_downward_24"
+    app:layout_constraintEnd_toStartOf="@+id/textViewComments"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/textViewViews"
+    app:layout_constraintTop_toTopOf="@+id/textViewViews"
+    tools:text="300" />
+
+<TextView
+    android:id="@+id/textViewComments"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:drawablePadding="10dp"
+    android:gravity="center"
+    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+    app:drawableLeftCompat="@drawable/ic_baseline_comment"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toEndOf="@+id/textViewDownloads"
+    app:layout_constraintTop_toTopOf="@+id/textViewDownloads"
+    tools:text="500" />
+
+<androidx.cardview.widget.CardView
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="24dp"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="10dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/textViewLikes">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/picture_contributer"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewUser"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+        <TextView
+            android:id="@+id/textViewUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewUser"
+            app:layout_constraintStart_toStartOf="@+id/imageViewUser"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewUser"
+            tools:text="Joel Kanyi" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
