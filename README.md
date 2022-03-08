@@ -42,11 +42,11 @@ Libraries used in the whole application are:
 ## Demo
 <p float="left">
 <img src="screenshots/demo1.png" width=250/>
-<img src="screenshoots/demo2.png" width=250/>
-<img src="screenshoots/demo3.png" width=250/>
-<img src="screenshoots/demo4.png" width=250/>
-<img src="screenshoots/demo5.png" width=250/>
-<img src="screenshoots/demo6.png" width=250/>
+<img src="screenshots/demo2.png" width=250/>
+<img src="screenshots/demo3.png" width=250/>
+<img src="screenshots/demo4.png" width=250/>
+<img src="screenshots/demo5.png" width=250/>
+<img src="screenshots/demo6.png" width=250/>
 </p>
   
 ## Support
