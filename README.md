@@ -41,7 +41,7 @@ Libraries used in the whole application are:
 - [Retrofit](https://abhiandroid.com/programming/retrofit) - In Android, Retrofit is a REST Client for Java and Android by Square inc under Apache 2.0 license. Its a simple network library that used for network transactions. By using this library we can seamlessly capture JSON response from web service/web API.
 ## Demo
 <p float="left">
-<img src="screenshoots/demo1.png" width=250/>
+<img src="screenshots/demo1.png" width=250/>
 <img src="screenshoots/demo2.png" width=250/>
 <img src="screenshoots/demo3.png" width=250/>
 <img src="screenshoots/demo4.png" width=250/>
