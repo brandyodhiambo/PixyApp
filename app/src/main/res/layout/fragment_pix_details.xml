@@ -125,7 +125,7 @@ tools:context=".ui.main.view.fragments.PixDetailsFragment">
             app:layout_constraintEnd_toEndOf="@+id/imageViewUser"
             app:layout_constraintStart_toStartOf="@+id/imageViewUser"
             app:layout_constraintTop_toBottomOf="@+id/imageViewUser"
-            tools:text="Joel Kanyi" />
+            tools:text="Brandy Odhiambo" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
 
