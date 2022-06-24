@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.odhiambodevelopers.pixyapp.data.local.PixyDatabase
 import com.odhiambodevelopers.pixyapp.data.network.api.ApiService
+import com.odhiambodevelopers.pixyapp.data.repository.PixyRepo
 import com.odhiambodevelopers.pixyapp.data.repository.PixyRepoImpl
 import com.odhiambodevelopers.pixyapp.utils.Constants.BASE_URL
 import dagger.Module
@@ -31,7 +32,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePixyRepository(apiService: ApiService,pixyDatabase:PixyDatabase):PixyRepoImpl{
+    fun providePixyRepository(apiService: ApiService,pixyDatabase:PixyDatabase): PixyRepo {
         return PixyRepoImpl(apiService, pixyDatabase)
     }
 
